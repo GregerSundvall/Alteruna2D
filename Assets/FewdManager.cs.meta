@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 34591c5f5271d2c46b99fe19a9f3fce3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - BlipPrefab: {fileID: -8707982271409374398, guid: 186c18122cdf92b46bb0d47ef3068c89, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

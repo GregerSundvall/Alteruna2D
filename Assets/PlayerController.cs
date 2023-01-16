@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
         _transform = GetComponent<Transform>();
     }
+    
+    public void OnPosessed()
+    {
+        _avatar.transform.position = Vector3.zero;
+    }
 
     void Update()
     {

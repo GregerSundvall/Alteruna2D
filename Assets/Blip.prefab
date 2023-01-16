@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -3032654279716463696}
   m_Layer: 0
   m_Name: Blip
-  m_TagString: Untagged
+  m_TagString: Fewd
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

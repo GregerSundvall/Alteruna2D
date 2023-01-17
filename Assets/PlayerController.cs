@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer _renderer;
     private Camera _camera;
     private Transform _transform;
-    private bool _sizeWasUpdated = false;
+    public bool sizeWasUpdated = false;
     
 
     void Start()
@@ -52,10 +52,10 @@ public class PlayerController : MonoBehaviour
             // Come on camera, follow me!
             _camera.transform.position = new Vector3(transform.position.x, transform.position.y, -20);
 
-            if (_sizeWasUpdated)
+            if (sizeWasUpdated)
             {
                 transform.localScale = new Vector3(Size, Size, 1);
-                _sizeWasUpdated = false;
+                sizeWasUpdated = false;
             }
             
             Wrap();
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         if (col.gameObject.CompareTag("Fewd"))
         {
             Debug.Log("Player collided ");
-            _sizeWasUpdated = true;
+            sizeWasUpdated = true;
             Size += 0.05f;
         }
     }

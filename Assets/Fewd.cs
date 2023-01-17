@@ -14,6 +14,10 @@ public class Fewd : Synchronizable {
 
     void Start()
     {
+        
+        //check if I am "server"
+        //if "server", set random positions
+        //if not "server", get positions
         position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
         rotation = new Vector3(0, 0, Random.Range(0, 360));
     }

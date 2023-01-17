@@ -482,6 +482,15 @@ MonoBehaviour:
   - {fileID: 5749737135530648826, guid: 25ca265a28569bf49892dc31706f6a76, type: 3}
   Connected:
     m_PersistentCalls:
+      m_Calls: []
+  Disconnected:
+    m_PersistentCalls:
+      m_Calls: []
+  NetworkError:
+    m_PersistentCalls:
+      m_Calls: []
+  RoomJoined:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1059727420}
         m_TargetAssemblyTypeName: FewdManager, Assembly-CSharp
@@ -495,15 +504,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  Disconnected:
-    m_PersistentCalls:
-      m_Calls: []
-  NetworkError:
-    m_PersistentCalls:
-      m_Calls: []
-  RoomJoined:
-    m_PersistentCalls:
-      m_Calls: []
   RoomLeft:
     m_PersistentCalls:
       m_Calls: []

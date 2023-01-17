@@ -22,8 +22,8 @@ public class Powerups : Synchronizable
     private void RandomizePosition()
     {
         Vector2 position = new Vector2(Random.Range(50, 150), Random.Range(50, 150));
-        Vector2 rotation = new Vector2(Random.Range(50, 150), Random.Range(50, 150));
-        _PowerupSpawner.Spawn(0, position, rotation);
+        //Vector2 rotation = new Vector2(Random.Range(50, 150), Random.Range(50, 150));
+        _PowerupSpawner.Spawn(0, position);
     }
     
     // Start is called before the first frame update

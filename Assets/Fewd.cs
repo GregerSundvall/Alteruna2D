@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Alteruna;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,32 +13,51 @@ public class Fewd : Synchronizable {
     private Vector3 oldRotation;
     private bool _wasHit = false;
 
+    private Multiplayer alterunaMP;
+    private bool iAmServer;
+
     void Start()
     {
-        
-        //check if I am "server"
+        alterunaMP = FindObjectOfType<Multiplayer>();
+        iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
+
+        if (iAmServer)
+        {
+            position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
+            rotation = new Vector3(0, 0, Random.Range(0, 360));
+        }
         //if "server", set random positions
         //if not "server", get positions
-        position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
-        rotation = new Vector3(0, 0, Random.Range(0, 360));
+        
     }
 
     void Update()
     {
-        //check if I am "server"
-        //if "server", update positions
-        //if not "server", get positions
-        
-        if (_wasHit)
+        iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
+        if (iAmServer)
         {
-            Reset();
-            _wasHit = false;
+            //if "server", update positions
+            if (_wasHit)
+            {
+                Reset();
+                _wasHit = false;
+            }
+            
+            transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
+            position = transform.position;
+            rotation = transform.rotation.eulerAngles;
+            
+            Wrap();
+            
+            Commit();
         }
-        transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
-        Wrap();
-        
-        Commit();
         SyncUpdate();
+
+        if (!iAmServer)
+        {
+            transform.position = position;
+            transform.rotation = Quaternion.Euler(rotation);
+        }
     }
     
     public override void AssembleData(Writer writer, byte LOD = 100)

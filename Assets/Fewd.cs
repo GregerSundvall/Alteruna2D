@@ -20,6 +20,10 @@ public class Fewd : Synchronizable {
 
     void Update()
     {
+        //check if I am "server"
+        //if "server", update positions
+        //if not "server", get positions
+        
         if (_wasHit)
         {
             Reset();

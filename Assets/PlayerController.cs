@@ -26,10 +26,10 @@ public class PlayerController : MonoBehaviour
         _transform = GetComponent<Transform>();
     }
     
-    public void OnPosessed()
-    {
-        _avatar.transform.position = Vector3.zero;
-    }
+    // public void OnPosessed()
+    // {
+    //     _avatar.transform.position = Vector3.zero;
+    // }
 
     void Update()
     {

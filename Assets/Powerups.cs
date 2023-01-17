@@ -40,12 +40,12 @@ public class Powerups : Synchronizable
     
     public override void AssembleData(Writer writer, byte LOD = 100)
     {
-        throw new System.NotImplementedException();
+        // TODO 
     }
 
     public override void DisassembleData(Reader reader, byte LOD = 100)
     {
-        throw new System.NotImplementedException();
+        // TODO
     }
 
     //Message ewilsandman, 𒉭 Seglarn 🎀, Greger

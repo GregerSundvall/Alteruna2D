@@ -7,8 +7,8 @@ using UnityEngine.PlayerLoop;
 
 public class FewdManager : MonoBehaviour {
 
-    [SerializeField] private Fewd FewdPrefab;
-    private List<Fewd> FewdList;
+    [SerializeField] private GameObject FewdPrefab;
+    private List<GameObject> FewdList = new List<GameObject>();
 
 
     void Start()

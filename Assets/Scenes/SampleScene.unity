@@ -471,7 +471,7 @@ MonoBehaviour:
     Users: 
   - Name: Max
     NetLOD: 4
-    Users: 00000100
+    Users: 
   MaxPlayers: 10
   SpawnAvatarOnJoin: 1
   AvatarPrefab: {fileID: 2169122544570248506, guid: 9b5bdd56bec1c96408194b058b4ae45a, type: 3}

@@ -43,7 +43,7 @@ public class Fewd : Synchronizable {
             rotation = transform.rotation.eulerAngles;
             
             Wrap();
-            
+            Commit();
         }
         SyncUpdate();
         

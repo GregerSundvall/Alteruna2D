@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2347556051380156526}
   - component: {fileID: 8586007880991264659}
   - component: {fileID: -629543278948688686}
+  - component: {fileID: 3460538254358843711}
   m_Layer: 0
   m_Name: Fewd
   m_TagString: Fewd
@@ -30,8 +31,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8458813501190115108}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dad2243c750f25408049465bfc0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Multiplayer: {fileID: 0}
+  UID: {fileID: 0}
+  BucketBehaviors: []
 --- !u!58 &-629543278948688686
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -115,65 +118,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!1001 &2464733685985094550
-PrefabInstance:
+--- !u!114 &3460538254358843711
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 5136521671325894658}
-    m_Modifications:
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7934891420956055995, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-      propertyPath: m_Name
-      value: Powerup
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
---- !u!4 &8458813501190115108 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6293710293254251698, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
-  m_PrefabInstance: {fileID: 2464733685985094550}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291480484761069742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1709514741, guid: 0ae8d181602a00248a82f64a684a1c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  a: 8357e175-3f6b-4ab2-8d67-4dfe21a4a22e

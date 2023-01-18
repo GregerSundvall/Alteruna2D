@@ -12,18 +12,23 @@ public class FewdManager : MonoBehaviour
     // private List<GameObject> FewdList = new List<GameObject>();
     [SerializeField] private Spawner spawner;
     private Multiplayer alterunaMP;
-    private bool iAmServer;
+    private bool iAmServer = false;
 
     void Start()
     {
         alterunaMP = FindObjectOfType<Multiplayer>();
-        iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
 
 
     }
     
     public void Init()
     {
+        if (alterunaMP.Me == alterunaMP.GetUser(0))
+        {
+            iAmServer = true;
+        }
+        Debug.Log(alterunaMP.Me);
+        
         if (iAmServer)
         {
             for (int i = 0; i < 1; i++)

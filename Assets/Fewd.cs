@@ -87,11 +87,10 @@ public class Fewd : Synchronizable {
 
     private void Wrap()
     {
-        if (transform.position.x > 150) { transform.position += Vector3.left * 10; }
-        if (transform.position.x < 50) { transform.position += Vector3.right * 10; }
-        if (transform.position.y > 150) { transform.position += Vector3.down * 10; }
-        if (transform.position.y < 50) { transform.position += Vector3.up * 10; } 
-        Commit();
+        if (transform.position.x > 150) { transform.position += Vector3.left * 10; Commit();}
+        if (transform.position.x < 50) { transform.position += Vector3.right * 10; Commit();}
+        if (transform.position.y > 150) { transform.position += Vector3.down * 10; Commit();}
+        if (transform.position.y < 50) { transform.position += Vector3.up * 10; Commit();} 
     }
     
     void ResetPosition()

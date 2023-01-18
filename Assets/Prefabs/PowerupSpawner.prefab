@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2368709214573589726}
   - component: {fileID: 6978962131772847709}
   - component: {fileID: 8610793434252204468}
-  - component: {fileID: 1782993430214943111}
+  - component: {fileID: -1231244011477759859}
   m_Layer: 0
   m_Name: PowerupSpawner
   m_TagString: Untagged
@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Multiplayer: {fileID: 0}
-  SpawnableObjects: []
+  SpawnableObjects:
+  - {fileID: 7934891420956055995, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}
   ObjectSpawned:
     m_PersistentCalls:
       m_Calls: []
@@ -67,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   a: c943b8ee-b1a3-4f6f-a573-4d129114b21f
---- !u!114 &1782993430214943111
+--- !u!114 &-1231244011477759859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,45 +77,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1025706129596016006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffd474d4fc46eed4b987237168b62e44, type: 3}
+  m_Script: {fileID: 11500000, guid: e316d47807ceccb4888aa74a25ef9fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Multiplayer: {fileID: 0}
-  UID: {fileID: 0}
-  BucketBehaviors:
-  - Name: Min
-    NetLOD: 0
-    Frequency: -1
-    Pending: 0
-    LastUpdated: 0
-    NeverString: Never
-    RealtimeString: Realtime
-  - Name: Low
-    NetLOD: 1
-    Frequency: 0
-    Pending: 0
-    LastUpdated: 0
-    NeverString: Never
-    RealtimeString: Realtime
-  - Name: Mid
-    NetLOD: 2
-    Frequency: 0
-    Pending: 0
-    LastUpdated: 0
-    NeverString: Never
-    RealtimeString: Realtime
-  - Name: High
-    NetLOD: 3
-    Frequency: 0
-    Pending: 0
-    LastUpdated: 0
-    NeverString: Never
-    RealtimeString: Realtime
-  - Name: Max
-    NetLOD: 4
-    Frequency: 500
-    Pending: 0
-    LastUpdated: 0
-    NeverString: Never
-    RealtimeString: Realtime
+  _PowerupSpawner: {fileID: 6978962131772847709}
   _powerups: {fileID: 7934891420956055995, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}

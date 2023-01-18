@@ -5,6 +5,7 @@ using Alteruna;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 
 
@@ -13,30 +14,20 @@ using Random = UnityEngine.Random;
 
 public class Powerups : Synchronizable
 {
-    private Spawner _PowerupSpawner;
-    private Transform _transform;
-    [SerializeField] private GameObject _powerups;
+    
+
+    //private List<Powerups> PowerupsList = new List<Powerups>();
     //private float testfloat = 1.4f;
     //public Vector2 OldPosition = new Vector2(Random.Range(100, 150), Random.Range(100, 150)); 
         
 
-    private void Run()
-    {
-        _PowerupSpawner = GetComponent<Spawner>();
-        _PowerupSpawner.SpawnableObjects.Add(_powerups.gameObject);
-    }
+   
 
-    private void RandomizePosition()
-    {
-        Vector2 position = new Vector2(Random.Range(50, 150), Random.Range(50, 150));
-        _PowerupSpawner.Spawn(0, position);
-    }
-    
+  
     // Start is called before the first frame update
     void Start()
     {
-        Run();
-        RandomizePosition();
+       
     }
 
     // Update is called once per frame
@@ -50,7 +41,7 @@ public class Powerups : Synchronizable
     {
 
 
-         writer.Write((_transform.localPosition));
+         //writer.Write((_transform.localPosition));
         //throw new System.NotImplementedException();
 
     }
@@ -58,7 +49,7 @@ public class Powerups : Synchronizable
     public override void DisassembleData(Reader reader, byte LOD = 100)
     {
 
-        _transform.localPosition = reader.ReadVector2();
+        //_transform.localPosition = reader.ReadVector2();
         //throw new System.NotImplementedException();
     }
 
@@ -79,7 +70,7 @@ public class Powerups : Synchronizable
         {
             timer -= Time.deltaTime;
         }
-        RandomizePosition();
+        //RandomizePosition();
         timer = 10.0f;
     }
 

@@ -5,27 +5,34 @@ using Alteruna;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class FewdManager : MonoBehaviour {
+public class FewdManager : MonoBehaviour 
+{
 
-    [SerializeField] private GameObject FewdPrefab;
-    private List<GameObject> FewdList = new List<GameObject>();
+    // [SerializeField] private GameObject FewdPrefab;
+    // private List<GameObject> FewdList = new List<GameObject>();
     [SerializeField] private Spawner spawner;
-    
+    private Multiplayer alterunaMP;
+    private bool iAmServer;
 
     void Start()
     {
-        
-        
+        alterunaMP = FindObjectOfType<Multiplayer>();
+        iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
 
-        
+
     }
     
     public void Init()
     {
-        for (int i = 0; i < 1; i++)
+        if (iAmServer)
         {
-            FewdList.Add(spawner.Spawn(0));
+            for (int i = 0; i < 1; i++)
+            {
+                spawner.Spawn(0);
+                // FewdList.Add();
+            }
         }
+
     }
     
 

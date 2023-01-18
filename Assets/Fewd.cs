@@ -14,55 +14,61 @@ public class Fewd : Synchronizable {
     private bool _wasHit = false;
     private bool hasChanged = false;
 
-    private Multiplayer alterunaMP;
-    private bool iAmServer;
+    // private Multiplayer alterunaMP;
+    // private bool iAmServer;
 
     void Start()
     {
-        alterunaMP = FindObjectOfType<Multiplayer>();
-        iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
+        // alterunaMP = FindObjectOfType<Multiplayer>();
+        // iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
+        
+        
+        transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
 
-        if (iAmServer)
-        {
-            position = new Vector3(0, 0, 0);
-            // position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
-            rotation = new Vector3(0, 0, Random.Range(0, 360));
-            transform.position = position;
-            transform.rotation = Quaternion.Euler(rotation);
-            Commit();
-        }
+        Commit();
+
+        // if (iAmServer)
+        // {
+        //     position = new Vector3(0, 0, 0);
+        //     transform.position = position;
+        // }
     }
 
     void Update()
     {
-        iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
-        if (iAmServer)
-        {
-            transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
-            position = transform.position;
-            rotation = transform.rotation.eulerAngles;
-            
-            Wrap();
-            Commit();
-        }
-        SyncUpdate();
+        transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
+        Wrap();
         
-        if (!iAmServer)
-        {
-            transform.position = position;
-            transform.rotation = Quaternion.Euler(rotation);
-        }
-    
         if (_wasHit)
         {
             ResetPosition();
             _wasHit = false;
         }
+        
+        SyncUpdate();
+        // iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
+        // if (iAmServer)
+        // {
+        //     
+        //     position = transform.position;
+        //     rotation = transform.rotation.eulerAngles;
+        //     
+        //     Commit();
+        // }
+        
+        // if (!iAmServer)
+        // {
+        //     transform.position = position;
+        //     transform.rotation = Quaternion.Euler(rotation);
+        // }
+    
+
     }
 
     private void FixedUpdate()
     {
-        Commit();
+        // Commit();
     }
 
     public override void AssembleData(Writer writer, byte LOD = 100)
@@ -85,12 +91,14 @@ public class Fewd : Synchronizable {
         if (transform.position.x < 50) { transform.position += Vector3.right * 10; }
         if (transform.position.y > 150) { transform.position += Vector3.down * 10; }
         if (transform.position.y < 50) { transform.position += Vector3.up * 10; } 
+        Commit();
     }
     
     void ResetPosition()
     {
         transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
         transform.Rotate(0, 0, Random.Range(0, 360));
+        Commit();
     }
 
     private void OnCollisionEnter2D(Collision2D col)

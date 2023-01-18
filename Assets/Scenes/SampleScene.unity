@@ -693,5 +693,13 @@ PrefabInstance:
       propertyPath: Multiplayer
       value: 
       objectReference: {fileID: 1526902061}
+    - target: {fileID: 3689200456714829167, guid: 027dd39045ebd804293f90e4c617c15c, type: 3}
+      propertyPath: SpawnableObjects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3689200456714829167, guid: 027dd39045ebd804293f90e4c617c15c, type: 3}
+      propertyPath: SpawnableObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 3291480484761069742, guid: 5f63d3e643e1c554e86a0bd2f35a7222, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 027dd39045ebd804293f90e4c617c15c, type: 3}

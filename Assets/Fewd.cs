@@ -25,10 +25,9 @@ public class Fewd : Synchronizable {
         {
             position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
             rotation = new Vector3(0, 0, Random.Range(0, 360));
+            transform.position = position;
+            transform.rotation = Quaternion.Euler(rotation);
         }
-        //if "server", set random positions
-        //if not "server", get positions
-        
     }
 
     void Update()
@@ -36,7 +35,6 @@ public class Fewd : Synchronizable {
         iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
         if (iAmServer)
         {
-            //if "server", update positions
             if (_wasHit)
             {
                 Reset();
@@ -76,10 +74,10 @@ public class Fewd : Synchronizable {
 
     private void Wrap()
     {
-        if (transform.position.x > 5) { transform.position += Vector3.left * 10; }
-        if (transform.position.x < 5) { transform.position += Vector3.right * 10; }
-        if (transform.position.y > 5) { transform.position += Vector3.down * 10; }
-        if (transform.position.y < 5) { transform.position += Vector3.up * 10; } 
+        if (transform.position.x > 150) { transform.position += Vector3.left * 10; }
+        if (transform.position.x < 50) { transform.position += Vector3.right * 10; }
+        if (transform.position.y > 150) { transform.position += Vector3.down * 10; }
+        if (transform.position.y < 50) { transform.position += Vector3.up * 10; } 
     }
     
     void ResetPosition()

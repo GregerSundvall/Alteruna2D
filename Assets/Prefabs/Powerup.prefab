@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 830215353586827362}
   - component: {fileID: 3867673147369967061}
   - component: {fileID: -3189298690349846834}
+  - component: {fileID: 4887192472602903160}
   m_Layer: 0
   m_Name: Powerup
   m_TagString: Untagged
@@ -98,6 +99,7 @@ MonoBehaviour:
     NeverString: Never
     RealtimeString: Realtime
   _powerups: {fileID: 3867673147369967061}
+  OldPosition: {x: 0, y: 0}
 --- !u!212 &-3189298690349846834
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -150,3 +152,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &4887192472602903160
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7934891420956055995}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5

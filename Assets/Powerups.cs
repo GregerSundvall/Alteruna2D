@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Alteruna;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 //[SerializeField] private Powerups Powerups;
@@ -11,7 +14,11 @@ using UnityEngine;
 public class Powerups : Synchronizable
 {
     private Spawner _PowerupSpawner;
+    private Transform _transform;
     [SerializeField] private Powerups _powerups;
+    //private float testfloat = 1.4f;
+    //public Vector2 OldPosition = new Vector2(Random.Range(100, 150), Random.Range(100, 150)); 
+        
 
     private void Run()
     {
@@ -22,7 +29,6 @@ public class Powerups : Synchronizable
     private void RandomizePosition()
     {
         Vector2 position = new Vector2(Random.Range(50, 150), Random.Range(50, 150));
-        //Vector2 rotation = new Vector2(Random.Range(50, 150), Random.Range(50, 150));
         _PowerupSpawner.Spawn(0, position);
     }
     
@@ -30,6 +36,7 @@ public class Powerups : Synchronizable
     void Start()
     {
         Run();
+        RandomizePosition();
     }
 
     // Update is called once per frame
@@ -38,14 +45,40 @@ public class Powerups : Synchronizable
         
     }
     
+    
     public override void AssembleData(Writer writer, byte LOD = 100)
     {
-        // TODO 
+
+
+         writer.Write((_transform.localPosition));
+        //throw new System.NotImplementedException();
+
     }
 
     public override void DisassembleData(Reader reader, byte LOD = 100)
     {
-        // TODO
+
+        _transform.localPosition = reader.ReadVector2();
+        //throw new System.NotImplementedException();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        StartTimer();
+        //Destroy();
+    }
+
+
+
+    public void StartTimer()
+    {
+        float timer = 10.9f;
+        if (timer >= 0)
+        {
+            timer -= Time.deltaTime;
+        }
+
+        timer = 10.0f;
     }
 
     //Message ewilsandman, 𒉭 Seglarn 🎀, Greger

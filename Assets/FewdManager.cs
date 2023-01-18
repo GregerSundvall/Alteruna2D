@@ -9,19 +9,23 @@ public class FewdManager : MonoBehaviour {
 
     [SerializeField] private GameObject FewdPrefab;
     private List<GameObject> FewdList = new List<GameObject>();
-
+    [SerializeField] private Spawner spawner;
+    
 
     void Start()
     {
+        
+        
 
         
     }
     
     public void Init()
     {
-        for (int i = 0; i < 200; i++)
+        for (int i = 0; i < 80; i++)
         {
-            FewdList.Add(Instantiate(FewdPrefab));
+            
+            FewdList.Add(spawner.Spawn(0));
         }
     }
     

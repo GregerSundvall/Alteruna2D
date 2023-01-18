@@ -41,7 +41,6 @@ public class Fewd : Synchronizable {
             
             Wrap();
             
-            Commit();
         }
         SyncUpdate();
         
@@ -56,6 +55,11 @@ public class Fewd : Synchronizable {
             ResetPosition();
             _wasHit = false;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        Commit();
     }
 
     public override void AssembleData(Writer writer, byte LOD = 100)

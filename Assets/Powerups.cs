@@ -7,7 +7,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-//[SerializeField] private Powerups Powerups;
+
 
 
 
@@ -15,7 +15,7 @@ public class Powerups : Synchronizable
 {
     private Spawner _PowerupSpawner;
     private Transform _transform;
-    [SerializeField] private Powerups _powerups;
+    [SerializeField] private GameObject _powerups;
     //private float testfloat = 1.4f;
     //public Vector2 OldPosition = new Vector2(Random.Range(100, 150), Random.Range(100, 150)); 
         
@@ -65,6 +65,7 @@ public class Powerups : Synchronizable
     private void OnTriggerEnter(Collider other)
     {
         StartTimer();
+        Debug.Log("Collision happened");
         //Destroy();
     }
 
@@ -72,12 +73,13 @@ public class Powerups : Synchronizable
 
     public void StartTimer()
     {
+        Debug.Log("Timer started");
         float timer = 10.9f;
         if (timer >= 0)
         {
             timer -= Time.deltaTime;
         }
-
+        RandomizePosition();
         timer = 10.0f;
     }
 

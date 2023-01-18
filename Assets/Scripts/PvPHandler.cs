@@ -40,29 +40,27 @@ public class PvPHandler : MonoBehaviour
                 Debug.Log("other size " + otherPlayerController.Size);
                 Debug.Log("my size " + _playerController.Size);
                 Debug.Log(GetComponent<UniqueID>().UIDString);
-                 User otherPlayer = other.gameObject.GetComponent<Avatar>().Possessor;
-                 String otherGuid = other.gameObject.GetComponent<UniqueID>().UIDString;
-                 
+                //User otherPlayer = other.gameObject.GetComponent<Avatar>().Possessor;
+                //String otherGuid = other.gameObject.GetComponent<UniqueID>().UIDString;
+                other.gameObject.GetComponent<PvPHandler>().Kill();
             }
         }
     }
-    
-    
     public void Kill()
     {
-        ProcedureParameters parameters = new ProcedureParameters();
-        parameters.Set("Guid", GetComponent<UniqueID>().UIDString);
+       // ProcedureParameters parameters = new ProcedureParameters();
+        //parameters.Set("Guid", GetComponent<UniqueID>().UIDString);
         _playerController.Size *= 2.0f;
         _playerController.sizeWasUpdated = true;
-        _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", otherPlayer, parameters);
+        _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", UserId.AllInclusive);
     }
 
-    public void KillProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
+    private void KillProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
     {
         Debug.Log("KILL PROCEDURE RUN");
-        String otherGuid = parameters.Get("otherGuid", "");
-        Debug.Log("other " + otherGuid);
-        Debug.Log("self" + GetComponent<UniqueID>().UIDString);
+        //String otherGuid = parameters.Get("otherGuid", "");
+       // Debug.Log("other " + otherGuid);
+        //Debug.Log("self" + GetComponent<UniqueID>().UIDString);
 
         transform.position = Vector3.zero;
         _playerController.Size *= 0.1f;

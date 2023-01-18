@@ -22,9 +22,8 @@ public class FewdManager : MonoBehaviour {
     
     public void Init()
     {
-        for (int i = 0; i < 80; i++)
+        for (int i = 0; i < 1; i++)
         {
-            
             FewdList.Add(spawner.Spawn(0));
         }
     }

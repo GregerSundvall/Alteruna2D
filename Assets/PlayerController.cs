@@ -66,19 +66,22 @@ public class PlayerController : MonoBehaviour
     
     private void Wrap()
     {
-        if (transform.position.x > 50) { transform.position += Vector3.left * 100; }
+        if (transform.position.x > 150) { transform.position += Vector3.left * 100; }
         if (transform.position.x < 50) { transform.position += Vector3.right * 100; }
-        if (transform.position.y > 50) { transform.position += Vector3.down * 100; }
+        if (transform.position.y > 150) { transform.position += Vector3.down * 100; }
         if (transform.position.y < 50) { transform.position += Vector3.up * 100; }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Fewd"))
+        if (_avatar.IsMe)
         {
-            Debug.Log("Player collided ");
-            sizeWasUpdated = true;
-            Size += 0.05f;
+            if (col.gameObject.CompareTag("Fewd"))
+            {
+                Debug.Log("Player collided ");
+                sizeWasUpdated = true;
+                Size += 0.05f;
+            }
         }
     }
 

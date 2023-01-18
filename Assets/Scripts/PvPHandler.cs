@@ -15,8 +15,10 @@ public class PvPHandler : MonoBehaviour
     private Transform _playerTransform;
     private PlayerController _playerController;
     private Multiplayer _multiplayerComponent;
+    
     void Start()
     {
+        _playerController = GetComponent<PlayerController>();    
         _playerTransform = GetComponent<Transform>();
         _playerAvatar = GetComponent<Avatar>();
         _multiplayerComponent = FindObjectOfType<Multiplayer>();
@@ -28,17 +30,21 @@ public class PvPHandler : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.GetComponent<Avatar>())
+        if (other.gameObject.GetComponent<Avatar>() != null)
         {
             PlayerController otherPlayerController = other.gameObject.GetComponent<PlayerController>();
-            
-            if (otherPlayerController.Size < _playerController.Size && otherPlayerController.Size > 1)
+
+            if (otherPlayerController.Size < _playerController.Size)
             {
+                Debug.Log("I'm eating you");
+                Debug.Log("other size " + otherPlayerController.Size);
+                Debug.Log("my size " + _playerController.Size);
+                Debug.Log(GetComponent<UniqueID>().UIDString);
                  User otherPlayer = other.gameObject.GetComponent<Avatar>().Possessor;
                  String otherGuid = other.gameObject.GetComponent<UniqueID>().UIDString;
                  ProcedureParameters parameters = new ProcedureParameters();
                  parameters.Set("otherGuid", otherGuid);
-                 _playerController.Size =+ otherPlayerController.Size / 2;
+                 _playerController.Size *= 2.0f;
                 _playerController.sizeWasUpdated = true;
                 _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", otherPlayer, parameters);
             }
@@ -47,16 +53,25 @@ public class PvPHandler : MonoBehaviour
 
     public void KillProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
     {
+        Debug.Log("KILL PROCEDURE RUN");
         String otherGuid = parameters.Get("otherGuid", "");
-        foreach (GameObject gObject in SceneManager.GetActiveScene().GetRootGameObjects()) // there must be a better way
-        {
-            if (gameObject.GetComponent<UniqueID>().UIDString == otherGuid)
-            {
-               PlayerController otherPlayerController = gObject.GetComponent<PlayerController>();
-               gObject.transform.position = Vector3.zero;
-               otherPlayerController.Size = 1;
-               otherPlayerController.sizeWasUpdated = true;
-            }
-        }
+        Debug.Log("other " + otherGuid);
+        Debug.Log("self" + GetComponent<UniqueID>().UIDString);
+
+        transform.position = Vector3.zero;
+        _playerController.Size *= 0.1f;
+        _playerController.sizeWasUpdated = true;
+        //
+        // foreach (GameObject gObject in SceneManager.GetActiveScene().GetRootGameObjects()) // there must be a better way
+        // {
+        //     if (gameObject.GetComponent<UniqueID>().UIDString == otherGuid)
+        //     {
+        //         Debug.Log("RESETTING LOSING PLAYER POSITION ETC");
+        //        PlayerController otherPlayerController = gObject.GetComponent<PlayerController>();
+        //        gObject.transform.position = Vector3.zero;
+        //        otherPlayerController.Size = 1;
+        //        otherPlayerController.sizeWasUpdated = true;
+        //     }
+        // }
     }
 }

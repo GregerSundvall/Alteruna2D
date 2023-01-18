@@ -452,6 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FewdPrefab: {fileID: 3291480484761069742, guid: 5f63d3e643e1c554e86a0bd2f35a7222, type: 3}
+  spawner: {fileID: 1059727422}
 --- !u!4 &1059727421
 Transform:
   m_ObjectHideFlags: 0
@@ -480,7 +481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Multiplayer: {fileID: 1526902061}
-  SpawnableObjects: []
+  SpawnableObjects:
+  - {fileID: 3291480484761069742, guid: 5f63d3e643e1c554e86a0bd2f35a7222, type: 3}
   ObjectSpawned:
     m_PersistentCalls:
       m_Calls: []

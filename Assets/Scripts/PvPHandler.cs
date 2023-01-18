@@ -36,19 +36,25 @@ public class PvPHandler : MonoBehaviour
 
             if (otherPlayerController.Size < _playerController.Size)
             {
-                Debug.Log("I'm eating you");
+                Debug.Log("I'm bigger than you");
                 Debug.Log("other size " + otherPlayerController.Size);
                 Debug.Log("my size " + _playerController.Size);
                 Debug.Log(GetComponent<UniqueID>().UIDString);
                  User otherPlayer = other.gameObject.GetComponent<Avatar>().Possessor;
                  String otherGuid = other.gameObject.GetComponent<UniqueID>().UIDString;
-                 ProcedureParameters parameters = new ProcedureParameters();
-                 parameters.Set("otherGuid", otherGuid);
-                 _playerController.Size *= 2.0f;
-                _playerController.sizeWasUpdated = true;
-                _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", otherPlayer, parameters);
+                 
             }
         }
+    }
+    
+    
+    public void Kill()
+    {
+        ProcedureParameters parameters = new ProcedureParameters();
+        parameters.Set("Guid", GetComponent<UniqueID>().UIDString);
+        _playerController.Size *= 2.0f;
+        _playerController.sizeWasUpdated = true;
+        _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", otherPlayer, parameters);
     }
 
     public void KillProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)

@@ -7,37 +7,29 @@ using UnityEngine.PlayerLoop;
 
 public class FewdManager : MonoBehaviour 
 {
-
-    // [SerializeField] private GameObject FewdPrefab;
-    // private List<GameObject> FewdList = new List<GameObject>();
     [SerializeField] private Spawner spawner;
     private Multiplayer alterunaMP;
-    private bool iAmServer = false;
+    private bool iAmPlayerZero = false;
 
     void Start()
     {
-        alterunaMP = FindObjectOfType<Multiplayer>();
-
-
     }
     
     public void Init()
     {
+        alterunaMP = FindObjectOfType<Multiplayer>();
         if (alterunaMP.Me == alterunaMP.GetUser(0))
         {
-            iAmServer = true;
+            iAmPlayerZero = true;
         }
-        Debug.Log(alterunaMP.Me);
         
-        if (iAmServer)
+        if (iAmPlayerZero)
         {
             for (int i = 0; i < 1; i++)
             {
                 spawner.Spawn(0);
-                // FewdList.Add();
             }
         }
-
     }
     
 

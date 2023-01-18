@@ -35,12 +35,6 @@ public class Fewd : Synchronizable {
         iAmServer = alterunaMP.Me == alterunaMP.GetUser(0);
         if (iAmServer)
         {
-            if (_wasHit)
-            {
-                ResetPosition();
-                _wasHit = false;
-            }
-            
             transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
             position = transform.position;
             rotation = transform.rotation.eulerAngles;
@@ -50,14 +44,20 @@ public class Fewd : Synchronizable {
             Commit();
         }
         SyncUpdate();
-
+        
         if (!iAmServer)
         {
             transform.position = position;
             transform.rotation = Quaternion.Euler(rotation);
         }
-    }
     
+        if (_wasHit)
+        {
+            ResetPosition();
+            _wasHit = false;
+        }
+    }
+
     public override void AssembleData(Writer writer, byte LOD = 100)
     {
         writer.Write(position);

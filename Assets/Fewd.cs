@@ -37,7 +37,7 @@ public class Fewd : Synchronizable {
         {
             if (_wasHit)
             {
-                Reset();
+                ResetPosition();
                 _wasHit = false;
             }
             

@@ -13,6 +13,11 @@ public class FewdManager : MonoBehaviour
     {
     }
     
+    public void Register(GameObject go)
+    {
+        spawnedFewd.Add(go);
+    }
+    
     public void Init()
     {
         alterunaMP = FindObjectOfType<Multiplayer>();

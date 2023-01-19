@@ -10,12 +10,14 @@ public class Fewd : Synchronizable {
     private Vector3 position;
     private Vector3 rotation;
 
-    [SerializeField] private Multiplayer alterunaMP;
+    [SerializeField] private FewdManager fewdManager;
     
     void Start()
     {
         transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
+        
+        
         
         Commit();
     }
@@ -69,6 +71,7 @@ public class Fewd : Synchronizable {
         if (col.gameObject.CompareTag("Player"))
         {
             ResetPosition();
+            Commit();
         }
     }
 

@@ -30,6 +30,15 @@ public class FewdManager : MonoBehaviour
                 spawner.Spawn(0);
             }
         }
+        // spawner forceSync?
+        SyncPositions();
+    }
+    
+    void SyncPositions()
+    {
+        // For every fewd, SyncPosition()
+        // how to access all spawned fewd?
+        // alterunaMP getsyncronizable(s)
     }
     
 

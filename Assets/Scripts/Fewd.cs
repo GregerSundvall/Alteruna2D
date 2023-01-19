@@ -26,6 +26,12 @@ public class Fewd : Synchronizable {
         SyncUpdate();
     }
     
+    void SyncPosition()
+    {
+        // More stuff here?
+        Commit();
+    }
+    
 
     public override void AssembleData(Writer writer, byte LOD = 100)
     {

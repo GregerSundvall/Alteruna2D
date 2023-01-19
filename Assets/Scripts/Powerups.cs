@@ -94,6 +94,6 @@ public class Powerups : MonoBehaviour
         Debug.Log("Collision happened");
         _multiplayerComponent.InvokeRemoteProcedure("PowerupEaten", UserId.All);
         StartTimer();
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

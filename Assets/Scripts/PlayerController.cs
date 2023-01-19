@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
         _camera = Camera.main;
         _transform = GetComponent<Transform>();
+        FindObjectOfType<Score>().AddPlayer(transform);
     }
     
     // public void OnPosessed()

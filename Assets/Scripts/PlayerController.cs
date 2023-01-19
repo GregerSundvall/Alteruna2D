@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour
         // Only let input affect the avatar if it belongs to me
         if (_avatar.IsMe)
         {
+            if (sizeWasUpdated)
+            {
+                transform.localScale = new Vector3(Size, Size, 1);
+                sizeWasUpdated = false;
+            }
             // Set the avatar representing me to be green
             _renderer.color = Color.green;
 
@@ -41,13 +46,8 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(0, 0, _rotation);
             
             // Come on camera, follow me!
-            _camera.transform.position = new Vector3(transform.position.x, transform.position.y, -20 * Size * Size);
+            _camera.transform.position = new Vector3(transform.position.x, transform.position.y, -20 * Size);
 
-            if (sizeWasUpdated)
-            {
-                transform.localScale = new Vector3(Size, Size, 1);
-                sizeWasUpdated = false;
-            }
             
             Wrap();
         }
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             if (col.gameObject.CompareTag("Fewd"))
             {
                 sizeWasUpdated = true;
-                Size += 0.05f;
+                Size += 0.01f;
             }
         }
     }

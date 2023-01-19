@@ -9,6 +9,8 @@ using Random = UnityEngine.Random;
 public class Fewd : Synchronizable {
     private Vector3 position;
     private Vector3 rotation;
+
+    [SerializeField] private Multiplayer alterunaMP;
     
     void Start()
     {
@@ -23,10 +25,12 @@ public class Fewd : Synchronizable {
         transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
         Wrap();
         
+        Commit();
+        
         SyncUpdate();
     }
     
-    void SyncPosition()
+    public void SyncPosition()
     {
         // More stuff here?
         Commit();

@@ -1,15 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.IO.IsolatedStorage;
 using Alteruna;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class FewdManager : MonoBehaviour 
 {
     [SerializeField] private Spawner spawner;
     private Multiplayer alterunaMP;
     private bool iAmPlayerZero = false;
+    private List<GameObject> spawnedFewd;
 
     void Start()
     {
@@ -27,18 +25,20 @@ public class FewdManager : MonoBehaviour
         {
             for (int i = 0; i < 1; i++)
             {
-                spawner.Spawn(0);
+                spawnedFewd.Add(spawner.Spawn(0));
             }
         }
-        // spawner forceSync?
-        SyncPositions();
+        
+        // SyncPositions();
     }
     
-    void SyncPositions()
+    public void SyncPositions()
     {
-        // For every fewd, SyncPosition()
-        // how to access all spawned fewd?
-        // alterunaMP getsyncronizable(s)
+        foreach (var spawnedObject in spawnedFewd)
+        {
+            var fewd = spawnedObject.GetComponent<Fewd>();
+            fewd.SyncPosition();
+        }
     }
     
 

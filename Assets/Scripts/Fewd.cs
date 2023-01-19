@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using Alteruna;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,8 +14,6 @@ public class Fewd : Synchronizable {
         transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
         
-        
-        
         Commit();
     }
 
@@ -32,7 +27,6 @@ public class Fewd : Synchronizable {
     
     public void SyncPosition()
     {
-        // More stuff here?
         Commit();
     }
     
@@ -48,6 +42,8 @@ public class Fewd : Synchronizable {
         transform.position = reader.ReadVector3();
         transform.rotation = Quaternion.Euler(reader.ReadVector3());
     }
+    
+    
 
     private void Wrap()
     {

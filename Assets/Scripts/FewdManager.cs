@@ -33,8 +33,6 @@ public class FewdManager : MonoBehaviour
                 spawnedFewd.Add(spawner.Spawn(0));
             }
         }
-        
-        // SyncPositions();
     }
     
     public void SyncPositions()

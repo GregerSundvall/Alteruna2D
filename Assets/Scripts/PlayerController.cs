@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
 {
-    
     public float Speed = 10.0f;
     public float RotationSpeed = 180.0f;
     public float Size = 1;
@@ -19,18 +16,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        // Get components
         _avatar = GetComponent<Alteruna.Avatar>();
         _renderer = GetComponent<SpriteRenderer>();
         _camera = Camera.main;
         _transform = GetComponent<Transform>();
         FindObjectOfType<Score>().AddPlayer(transform);
     }
-    
-    // public void OnPosessed()
-    // {
-    //     _avatar.transform.position = Vector3.zero;
-    // }
 
     void Update()
     {
@@ -40,7 +31,6 @@ public class PlayerController : MonoBehaviour
             // Set the avatar representing me to be green
             _renderer.color = Color.green;
 
-            // Get the horizontal and vertical axis.
             float _translation = Input.GetAxis("Vertical") * Speed;
             float _rotation = -Input.GetAxis("Horizontal") * RotationSpeed;
 
@@ -51,7 +41,7 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(0, 0, _rotation);
             
             // Come on camera, follow me!
-            _camera.transform.position = new Vector3(transform.position.x, transform.position.y, -20);
+            _camera.transform.position = new Vector3(transform.position.x, transform.position.y, -20 * Size);
 
             if (sizeWasUpdated)
             {
@@ -61,8 +51,6 @@ public class PlayerController : MonoBehaviour
             
             Wrap();
         }
-
-
     }
     
     private void Wrap()
@@ -85,6 +73,5 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-
+    
 }

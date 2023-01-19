@@ -6801,17 +6801,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5136521671325894658, guid: 5f63d3e643e1c554e86a0bd2f35a7222, type: 3}
   m_PrefabInstance: {fileID: 1059261996}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1059727420 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3689200456714829165, guid: 027dd39045ebd804293f90e4c617c15c, type: 3}
-  m_PrefabInstance: {fileID: 3689200456461456721}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34591c5f5271d2c46b99fe19a9f3fce3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1059727421 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3689200456714829167, guid: 027dd39045ebd804293f90e4c617c15c, type: 3}
@@ -10156,19 +10145,7 @@ MonoBehaviour:
       m_Calls: []
   OtherUserJoined:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1059727420}
-        m_TargetAssemblyTypeName: FewdManager, Assembly-CSharp
-        m_MethodName: SyncPositions
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OtherUserLeft:
     m_PersistentCalls:
       m_Calls: []

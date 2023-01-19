@@ -26,9 +26,7 @@ public class Fewd : Synchronizable {
     {
         transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
         Wrap();
-        
-        Commit();
-        
+
         SyncUpdate();
     }
     
@@ -53,10 +51,10 @@ public class Fewd : Synchronizable {
 
     private void Wrap()
     {
-        if (transform.position.x > 150) { transform.position += Vector3.left * 100; Commit();}
-        if (transform.position.x < 50) { transform.position += Vector3.right * 100; Commit();}
-        if (transform.position.y > 150) { transform.position += Vector3.down * 100; Commit();}
-        if (transform.position.y < 50) { transform.position += Vector3.up * 100; Commit();} 
+        if (transform.position.x > 150) { transform.position += Vector3.left * 100;}
+        if (transform.position.x < 50) { transform.position += Vector3.right * 100; }
+        if (transform.position.y > 150) { transform.position += Vector3.down * 100; }
+        if (transform.position.y < 50) { transform.position += Vector3.up * 100; } 
     }
     
     void ResetPosition()
@@ -71,7 +69,6 @@ public class Fewd : Synchronizable {
         if (col.gameObject.CompareTag("Player"))
         {
             ResetPosition();
-            Commit();
         }
     }
 

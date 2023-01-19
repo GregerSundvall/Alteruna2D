@@ -6,20 +6,23 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using System.Collections.Generic;
+using Alteruna.Trinity;
 
 
 
 
 
 
-public class Powerups : Synchronizable
+public class Powerups : MonoBehaviour
 {
     
 
     //private List<Powerups> PowerupsList = new List<Powerups>();
     //private float testfloat = 1.4f;
     //public Vector2 OldPosition = new Vector2(Random.Range(100, 150), Random.Range(100, 150)); 
-        
+    public bool isInvincible;
+    private Multiplayer _multiplayerComponent;
+    float PowerupTimer = 10.0f;
 
    
 
@@ -27,7 +30,10 @@ public class Powerups : Synchronizable
     // Start is called before the first frame update
     void Start()
     {
-       
+       _multiplayerComponent = FindObjectOfType<Multiplayer>();
+        isInvincible = false;
+        
+        _multiplayerComponent.RegisterRemoteProcedure("PowerupEaten", TimerProcedureFunction);
     }
 
     // Update is called once per frame
@@ -35,45 +41,59 @@ public class Powerups : Synchronizable
     {
         
     }
+
+    private void FixedUpdate()
+    {
+        if (isInvincible)
+        {
+            PowerupTimer -= Time.deltaTime;
+            Debug.Log(PowerupTimer.ToString());
+        }
+
+        if (PowerupTimer <= 0)
+        {
+            Debug.Log("Timer reached 0");
+            isInvincible = false;
+        }
+    }
+
+  //public override void AssembleData(Writer writer, byte LOD = 100)
+  //{
+
+
+  //     //writer.Write((_transform.localPosition));
+  //    //throw new System.NotImplementedException();
+
+  //}
+
+  //public override void DisassembleData(Reader reader, byte LOD = 100)
+  //{
+
+  //    //_transform.localPosition = reader.ReadVector2();
+  //    //throw new System.NotImplementedException();
+  //}
+
     
-    
-    public override void AssembleData(Writer writer, byte LOD = 100)
-    {
 
 
-         //writer.Write((_transform.localPosition));
-        //throw new System.NotImplementedException();
-
-    }
-
-    public override void DisassembleData(Reader reader, byte LOD = 100)
-    {
-
-        //_transform.localPosition = reader.ReadVector2();
-        //throw new System.NotImplementedException();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        StartTimer();
-        Debug.Log("Collision happened");
-        //Destroy();
-    }
-
-
-
-    public void StartTimer()
+    private void StartTimer()
     {
         Debug.Log("Timer started");
-        float timer = 10.9f;
-        if (timer >= 0)
-        {
-            timer -= Time.deltaTime;
-        }
-        //RandomizePosition();
-        timer = 10.0f;
+        PowerupTimer = 10.0f;
+        isInvincible = true;
     }
 
-    //Message ewilsandman, 𒉭 Seglarn 🎀, Greger
+    private void TimerProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
+    {
+        StartTimer();
+    }
 
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        //isInvincible = true;
+        Debug.Log("Collision happened");
+        _multiplayerComponent.InvokeRemoteProcedure("PowerupEaten", UserId.All);
+        StartTimer();
+        Destroy(this);
+    }
 }

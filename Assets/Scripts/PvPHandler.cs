@@ -15,6 +15,7 @@ public class PvPHandler : MonoBehaviour
     private Transform _playerTransform;
     private PlayerController _playerController;
     private Multiplayer _multiplayerComponent;
+    //[SerializeField] private GameObject PowerupRef;
     
     void Start()
     {
@@ -23,6 +24,7 @@ public class PvPHandler : MonoBehaviour
         _playerAvatar = GetComponent<Avatar>();
         _multiplayerComponent = FindObjectOfType<Multiplayer>();
         _serverPlayer = _multiplayerComponent.GetUser(0);
+        //PowerupRef = GetComponent<GameObject>();
         
         if (_serverPlayer == _multiplayerComponent.Me)
         {}
@@ -32,17 +34,24 @@ public class PvPHandler : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Avatar>() != null)
         {
-            PlayerController otherPlayerController = other.gameObject.GetComponent<PlayerController>();
-
-            if (otherPlayerController.Size < _playerController.Size)
+            var PWRef = other.gameObject.GetComponent<Powerups>();
+            if (PWRef != null)
             {
-                Debug.Log("I'm bigger than you");
-                Debug.Log("other size " + otherPlayerController.Size);
-                Debug.Log("my size " + _playerController.Size);
-                Debug.Log(GetComponent<UniqueID>().UIDString);
-                //User otherPlayer = other.gameObject.GetComponent<Avatar>().Possessor;
-                //String otherGuid = other.gameObject.GetComponent<UniqueID>().UIDString;
-                other.gameObject.GetComponent<PvPHandler>().Kill();
+                if (!PWRef.isInvincible)
+                {
+                    PlayerController otherPlayerController = other.gameObject.GetComponent<PlayerController>();
+
+                    if (otherPlayerController.Size < _playerController.Size)
+                    {
+                        Debug.Log("I'm bigger than you");
+                        Debug.Log("other size " + otherPlayerController.Size);
+                        Debug.Log("my size " + _playerController.Size);
+                        Debug.Log(GetComponent<UniqueID>().UIDString);
+                        //User otherPlayer = other.gameObject.GetComponent<Avatar>().Possessor;
+                        //String otherGuid = other.gameObject.GetComponent<UniqueID>().UIDString;
+                        other.gameObject.GetComponent<PvPHandler>().Kill();
+                    }
+                }
             }
         }
     }
@@ -54,6 +63,8 @@ public class PvPHandler : MonoBehaviour
         _playerController.sizeWasUpdated = true;
         _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", UserId.AllInclusive);
     }
+    
+    
 
     private void KillProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
     {

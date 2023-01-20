@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5136521671325894658}
   - component: {fileID: 2347556051380156526}
-  - component: {fileID: -629543278948688686}
   - component: {fileID: 3460538254358843711}
   - component: {fileID: -4535890698496631140}
+  - component: {fileID: 8803938771723785273}
   m_Layer: 0
   m_Name: Fewd
   m_TagString: Fewd
@@ -87,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &-629543278948688686
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3291480484761069742}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &3460538254358843711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,3 +150,17 @@ MonoBehaviour:
     LastUpdated: 0
     NeverString: Never
     RealtimeString: Realtime
+  fewdManager: {fileID: 0}
+--- !u!135 &8803938771723785273
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3291480484761069742}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}

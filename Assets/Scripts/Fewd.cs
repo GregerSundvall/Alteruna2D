@@ -1,4 +1,5 @@
 
+using System;
 using Alteruna;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -68,4 +69,11 @@ public class Fewd : Synchronizable {
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            ResetPosition();
+        }
+    }
 }

@@ -1,4 +1,6 @@
 
+using Alteruna;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour 
@@ -10,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Alteruna.Avatar _avatar;
     private SpriteRenderer _renderer;
     private Camera _camera;
-    private Transform _transform;
+    private RigidbodySynchronizable rigidbodySync;
     public bool sizeWasUpdated;
     
 
@@ -19,7 +21,7 @@ public class PlayerController : MonoBehaviour
         _avatar = GetComponent<Alteruna.Avatar>();
         _renderer = GetComponent<SpriteRenderer>();
         _camera = Camera.main;
-        _transform = GetComponent<Transform>();
+        rigidbodySync = GetComponent<RigidbodySynchronizable>();
         FindObjectOfType<Score>().AddPlayer(transform);
     }
 
@@ -36,18 +38,24 @@ public class PlayerController : MonoBehaviour
             // Set the avatar representing me to be green
             _renderer.color = Color.green;
 
-            float _translation = Input.GetAxis("Vertical") * Speed;
-            float _rotation = -Input.GetAxis("Horizontal") * RotationSpeed;
-
-            _translation *= Time.deltaTime;
-            _rotation *= Time.deltaTime;
+            float rotationInput = -Input.GetAxis("Horizontal") * RotationSpeed * Time.deltaTime;
+            Vector3 rotation = new Vector3(0, 0, rotationInput) + rigidbodySync.rotation.eulerAngles;
+            rigidbodySync.MoveRotation(Quaternion.Euler(rotation));
             
-            transform.Translate(0, _translation, 0, Space.Self);
-            transform.Rotate(0, 0, _rotation);
-            
-            // Come on camera, follow me!
-            _camera.transform.position = new Vector3(transform.position.x, transform.position.y, -20 * Size);
+            float moveInput = Input.GetAxis("Vertical") * Speed * Time.deltaTime;
+            var rads = rigidbodySync.rotation.eulerAngles.z * math.PI/180;
 
+            var cos = math.cos(rads);
+            var sin = math.sin(rads);
+            var newX = 0 * cos - moveInput * sin; 
+            var newY = 0 * sin + moveInput * cos;
+            var translation = new Vector3(newX, newY, 0);
+            
+            rigidbodySync.position += translation;
+            // rigidbodySync.MovePosition(translation);
+            // rigidbodySync.MovePosition(rigidbodySync.position + translation);
+            
+            _camera.transform.position = new Vector3(rigidbodySync.position.x, rigidbodySync.position.y, -20 * Size);
             
             Wrap();
         }
@@ -60,8 +68,10 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y > 150) { transform.position += Vector3.down * 100; }
         if (transform.position.y < 50) { transform.position += Vector3.up * 100; }
     }
+    
+    
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter(Collision col)
     {
         if (_avatar.IsMe)
         {

@@ -57,12 +57,12 @@ public class Powerups : MonoBehaviour
         if (isInvincible)
         {
             PowerupTimer -= Time.deltaTime;
-            //Debug.Log(PowerupTimer);
+            Debug.Log(PowerupTimer);
         }
 
         if (PowerupTimer <= 0)
         {
-            //Debug.Log("Timer reached 0");
+            Debug.Log("Timer reached 0");
             isInvincible = false;
             ResetTimer();
         }

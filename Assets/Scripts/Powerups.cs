@@ -23,6 +23,7 @@ public class Powerups : MonoBehaviour
     public bool isInvincible;
     private Multiplayer _multiplayerComponent;
     float PowerupTimer = 10.0f;
+    
 
    
 
@@ -56,12 +57,12 @@ public class Powerups : MonoBehaviour
         if (isInvincible)
         {
             PowerupTimer -= Time.deltaTime;
-            Debug.Log(PowerupTimer);
+            //Debug.Log(PowerupTimer);
         }
 
         if (PowerupTimer <= 0)
         {
-            Debug.Log("Timer reached 0");
+            //Debug.Log("Timer reached 0");
             isInvincible = false;
             ResetTimer();
         }
@@ -107,15 +108,18 @@ public class Powerups : MonoBehaviour
         StartTimer();
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter(Collision other)
     {
+        //Debug.Log("I collided WOAH!");
         if (other.gameObject.CompareTag("Powerup"))
         {
             isInvincible = true;
             Debug.Log("Collision happened");
             _multiplayerComponent.InvokeRemoteProcedure("PowerupEaten", UserId.All);
+            other.transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
+            Debug.Log(other.gameObject.transform.position);
             //StartTimer();
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
         }
     }
 }

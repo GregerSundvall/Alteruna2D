@@ -1,3 +1,4 @@
+using System;
 using Alteruna;
 using Alteruna.Trinity;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class PvPHandler : MonoBehaviour
         _multiplayerComponent.RegisterRemoteProcedure("KillPlayer", KillProcedureFunction);
     }
     
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.GetComponent<Avatar>() != null)
         {
@@ -44,7 +45,7 @@ public class PvPHandler : MonoBehaviour
             }
         }
     }
-    
+
     private void Kill()
     {
         _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", UserId.All);

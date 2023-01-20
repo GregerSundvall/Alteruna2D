@@ -31,9 +31,18 @@ public class Powerups : MonoBehaviour
     void Start()
     {
        _multiplayerComponent = FindObjectOfType<Multiplayer>();
+       _multiplayerComponent.RegisterRemoteProcedure("PowerupEaten", TimerProcedureFunction);
         isInvincible = false;
         
-        _multiplayerComponent.RegisterRemoteProcedure("PowerupEaten", TimerProcedureFunction);
+        
+        
+        float RandomNumber = Random.Range(0, 3);
+
+        //switch (RandomNumber)
+        //{
+        //    case 0:
+        //        
+        //}
     }
 
     // Update is called once per frame
@@ -47,40 +56,50 @@ public class Powerups : MonoBehaviour
         if (isInvincible)
         {
             PowerupTimer -= Time.deltaTime;
-            Debug.Log(PowerupTimer.ToString());
+            Debug.Log(PowerupTimer);
         }
 
         if (PowerupTimer <= 0)
         {
             Debug.Log("Timer reached 0");
             isInvincible = false;
+            ResetTimer();
         }
     }
 
   //public override void AssembleData(Writer writer, byte LOD = 100)
   //{
-
-
-  //     //writer.Write((_transform.localPosition));
+//
+//
+  //    //writer.Write((_transform.localPosition));
   //    //throw new System.NotImplementedException();
-
+//
   //}
-
+//
   //public override void DisassembleData(Reader reader, byte LOD = 100)
   //{
-
+//
   //    //_transform.localPosition = reader.ReadVector2();
   //    //throw new System.NotImplementedException();
   //}
 
-    
 
+
+  private void ResetTimer()
+  {
+      PowerupTimer = 10.0f;
+  }
 
     private void StartTimer()
     {
         Debug.Log("Timer started");
         PowerupTimer = 10.0f;
         isInvincible = true;
+        //if (PowerupTimer <= 0)
+        //{
+        //    ResetTimer();
+        //    Debug.Log("timer has been reset " + PowerupTimer);
+        //}
     }
 
     private void TimerProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
@@ -88,12 +107,15 @@ public class Powerups : MonoBehaviour
         StartTimer();
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        //isInvincible = true;
-        Debug.Log("Collision happened");
-        _multiplayerComponent.InvokeRemoteProcedure("PowerupEaten", UserId.All);
-        StartTimer();
-        Destroy(gameObject);
+        if (other.gameObject.CompareTag("Powerup"))
+        {
+            isInvincible = true;
+            Debug.Log("Collision happened");
+            _multiplayerComponent.InvokeRemoteProcedure("PowerupEaten", UserId.All);
+            //StartTimer();
+            Destroy(other.gameObject);
+        }
     }
 }

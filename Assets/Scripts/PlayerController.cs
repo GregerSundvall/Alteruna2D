@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float RotationSpeed = 180.0f;
     public float Size = 1;
 
-    private Alteruna.Avatar _avatar;
+    public Alteruna.Avatar Avatar;
     private SpriteRenderer _renderer;
     private Camera _camera;
     private RigidbodySynchronizable rigidbodySync;
@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        _avatar = GetComponent<Alteruna.Avatar>();
+        Avatar = GetComponent<Alteruna.Avatar>();
         _renderer = GetComponent<SpriteRenderer>();
         _camera = Camera.main;
         rigidbodySync = GetComponent<RigidbodySynchronizable>();
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Only let input affect the avatar if it belongs to me
-        if (_avatar.IsMe)
+        if (Avatar.IsMe)
         {
             if (sizeWasUpdated)
             {
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        if (_avatar.IsMe)
+        //if (Avatar.IsMe) This might be the reason we are desyncing in size
         {
             if (col.gameObject.CompareTag("Fewd"))
             {

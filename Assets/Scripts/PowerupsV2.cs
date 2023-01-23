@@ -72,7 +72,7 @@ public class PowerupsV2 : MonoBehaviour
         if (isInvincible)
         {
             InvincibilityTimer -= Time.deltaTime;
-            Debug.Log("Invincibility timer " + InvincibilityTimer);
+         //   Debug.Log("Invincibility timer " + InvincibilityTimer);
         }
         
         if (isFaster)
@@ -193,12 +193,12 @@ public class PowerupsV2 : MonoBehaviour
                 _multiplayerComponent.InvokeRemoteProcedure("IncreasedRotation", UserId.All);
                 Debug.Log(_playerController.RotationSpeed);
             }
-            other.transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
+            Random.InitState(System.DateTime.Now.Minute);
             //Picks a new random number and position and a new random seed for the next powerup to spawn.
-            Random.InitState((int)System.DateTime.Now.Ticks);
-            _RandomNumber = Random.Range(0, 2);
-            Debug.Log(other.gameObject.transform.position);
-            Debug.Log(_RandomNumber);
+            if (gameObject.GetComponent<PlayerController>().Avatar.IsMe)
+            {
+                other.gameObject.GetComponent<PowerUpObject>().NewPosition();
+            }
         }
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Alteruna;
 using Alteruna.Trinity;
@@ -11,24 +8,24 @@ public class PowerupsV2 : MonoBehaviour
     public bool isInvincible;
     public bool isFaster;
     public bool isRotatingFaster;
-    public bool isBigger;
-    private int _RandomNumber;
-    float InvincibilityTimer = 10.0f;
-    float SpeedupTimer = 10.0f;
-    float IncreaseRotationSpeedTimer = 10.0f;
-    private float IncreaseSizeTimer = 10.0f;
+    //public bool isBigger;
+    private int _randomNumber;
+    float _invincibilityTimer = 10.0f;
+    float _speedupTimer = 10.0f;
+    float _increaseRotationSpeedTimer = 10.0f;
+    //private float _increaseSizeTimer = 10.0f;
     private SpriteRenderer _renderer;
     private Multiplayer _multiplayerComponent;
     private PlayerController _playerController;
-    [SerializeField] private GameObject PowerupRef;
-    private SpriteRenderer _colorchange;
+    //[SerializeField] private GameObject PowerupRef;
+    //private SpriteRenderer _colorchange;
 
 
     private void Awake()
     {
         //Sets the random seed for the powerup and picks a random number to spawn different powerup on startup.
         Random.InitState((int)System.DateTime.Now.Ticks);
-        _RandomNumber = Random.Range(0, 2);
+        _randomNumber = Random.Range(0, 2);
     }
 
     // Start is called before the first frame update
@@ -71,74 +68,77 @@ public class PowerupsV2 : MonoBehaviour
     {
         if (isInvincible)
         {
-            InvincibilityTimer -= Time.deltaTime;
+            _invincibilityTimer -= Time.deltaTime;
          //   Debug.Log("Invincibility timer " + InvincibilityTimer);
         }
         
         if (isFaster)
         {
-            SpeedupTimer -= Time.deltaTime;
-            Debug.Log("Speed up timer " + SpeedupTimer);
+            _speedupTimer -= Time.deltaTime;
+            Debug.Log("Speed up timer " + _speedupTimer);
         }
         
         if (isRotatingFaster)
         {
-            IncreaseRotationSpeedTimer -= Time.deltaTime;
-            Debug.Log("Increased rotation timer " + IncreaseRotationSpeedTimer);
+            _increaseRotationSpeedTimer -= Time.deltaTime;
+            Debug.Log("Increased rotation timer " + _increaseRotationSpeedTimer);
         }
 
-        if (InvincibilityTimer <= 0)
+        if (_invincibilityTimer <= 0)
         {
             Debug.Log("Timer reached 0");
             isInvincible = false;
-            ResetInvincibilityTimer();
+            _invincibilityTimer = 10.0f;
+            //ResetInvincibilityTimer();
         }
 
-        if (SpeedupTimer <= 0)
+        if (_speedupTimer <= 0)
         {
             isFaster = false;
             _playerController.Speed = 10;
-            ResetSpeedupTimer();
+            _speedupTimer = 10.0f;
+            //ResetSpeedupTimer();
         }
         
-        if (IncreaseRotationSpeedTimer <= 0)
+        if (_increaseRotationSpeedTimer <= 0)
         {
             isRotatingFaster = false;
             _playerController.RotationSpeed = 10;
-            ResetIncreasedRotationTimer();
+            _invincibilityTimer = 10.0f;
+            //ResetIncreasedRotationTimer();
         }
     }
     
 
-  private void ResetInvincibilityTimer()
-  {
-      InvincibilityTimer = 10.0f;
-      Debug.Log("IsInvincible " + isInvincible);
-  }
+ //private void ResetInvincibilityTimer()
+ //{
+ //    InvincibilityTimer = 10.0f;
+ //    Debug.Log("IsInvincible " + isInvincible);
+ //}
 
-  private void ResetSpeedupTimer()
-  {
-      SpeedupTimer = 10.0f;
-      Debug.Log(_playerController.Speed);
-  }
+ //private void ResetSpeedupTimer()
+ //{
+ //    SpeedupTimer = 10.0f;
+ //    Debug.Log(_playerController.Speed);
+ //}
 
-  private void ResetIncreasedRotationTimer()
-  {
-      IncreaseRotationSpeedTimer = 10.0f;
-      Debug.Log(_playerController.RotationSpeed);
-  }
+  //private void ResetIncreasedRotationTimer()
+  //{
+  //    IncreaseRotationSpeedTimer = 10.0f;
+  //    Debug.Log(_playerController.RotationSpeed);
+  //}
 
     private void StartInvincibilityTimer()
     {
         Debug.Log("Timer started");
-        InvincibilityTimer = 10.0f;
+        _invincibilityTimer = 10.0f;
         isInvincible = true;
     }
 
     private void StartSpeedupTimer()
     {
         Debug.Log("Speedup timer started");
-        SpeedupTimer = 10.0f;
+        _speedupTimer = 10.0f;
         isFaster = true;
         _playerController.Speed = 100;
     }
@@ -146,7 +146,7 @@ public class PowerupsV2 : MonoBehaviour
     private void StartIncreaseRotationSpeedTimer()
     {
         Debug.Log("Increased rotation speed timer started");
-        IncreaseRotationSpeedTimer = 10.0f;
+        _increaseRotationSpeedTimer = 10.0f;
         isRotatingFaster = true;
         _playerController.RotationSpeed = 100;
     }
@@ -170,7 +170,7 @@ public class PowerupsV2 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Powerup"))
         {
-            if (_RandomNumber == 0)
+            if (_randomNumber == 0)
             {
                 isInvincible = true;
                 //_colorchange.color = Color.red;
@@ -178,7 +178,7 @@ public class PowerupsV2 : MonoBehaviour
                 Debug.Log(isInvincible);
             }
 
-            if (_RandomNumber == 1)
+            if (_randomNumber == 1)
             {
                 isFaster = true;
                 //_colorchange.color = Color.yellow;
@@ -186,7 +186,7 @@ public class PowerupsV2 : MonoBehaviour
                 Debug.Log(_playerController.Speed);
             }
 
-            if (_RandomNumber == 2)
+            if (_randomNumber == 2)
             {
                 isRotatingFaster = true;
                 //_colorchange.color = Color.magenta;

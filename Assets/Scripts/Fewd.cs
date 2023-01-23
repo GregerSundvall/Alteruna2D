@@ -8,12 +8,19 @@ public class Fewd : Synchronizable {
     private Vector3 position;
     private Vector3 rotation;
 
-    [SerializeField] private FewdManager fewdManager;
+    private float commitTimer = 0;
+    private Multiplayer alterunaMP;
+
+    // [SerializeField] private FewdManager fewdManager;
     
     void Start()
     {
         transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
+
+        alterunaMP = FindObjectOfType<Multiplayer>();
+        // fewdManager = FindObjectOfType<FewdManager>();
+        // fewdManager.Register(gameObject);
         
         Commit();
     }
@@ -23,11 +30,28 @@ public class Fewd : Synchronizable {
         transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
         Wrap();
 
+        Commit();
+        // if (commitTimer < 1)
+        // {
+        //     commitTimer += Time.deltaTime;
+        // }
+        // else
+        // {
+        //     if (alterunaMP.Me == alterunaMP.GetUser(0))
+        //     {
+        //         Debug.Log("commit");
+        //         Commit();
+        //         commitTimer = 0;
+        //     }
+        // }
+
         SyncUpdate();
     }
     
+
     public void SyncPosition()
     {
+        Debug.Log("individual sync pos");
         Commit();
     }
     

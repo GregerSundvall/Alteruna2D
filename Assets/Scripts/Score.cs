@@ -21,16 +21,16 @@ public class Score : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int i = 0;
+        // int i = 0;
 
-        if (!scoreText) scoreText = GetComponent<Text>();
-        scoreText.text = "";
-        foreach (var player in players)
-        {
-            //Debug.Log("Inside player loop");
-            scoreText.text += "player" + i + ": " + player.localScale.x.ToString("F2") + "\n";
-            i++;
-        }
+        // if (!scoreText) scoreText = GetComponent<Text>();
+        // scoreText.text = "";
+        // foreach (var player in players)
+        // {
+        //     //Debug.Log("Inside player loop");
+        //     scoreText.text += "player" + i + ": " + player.localScale.x.ToString("F2") + "\n";
+        //     i++;
+        // }
         //Debug.Log(scoreText.text);
     }
 

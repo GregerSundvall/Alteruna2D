@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3689200456714829164}
   - component: {fileID: 3689200456714829165}
-  - component: {fileID: 3689200456714829167}
   m_Layer: 0
   m_Name: FewdManager
   m_TagString: Untagged
@@ -45,24 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34591c5f5271d2c46b99fe19a9f3fce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FewdPrefab: {fileID: 3291480484761069742, guid: 5f63d3e643e1c554e86a0bd2f35a7222, type: 3}
---- !u!114 &3689200456714829167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3689200456714829162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 29116766, guid: 0ae8d181602a00248a82f64a684a1c88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Multiplayer: {fileID: 0}
-  SpawnableObjects: []
-  ObjectSpawned:
-    m_PersistentCalls:
-      m_Calls: []
-  ObjectDespawned:
-    m_PersistentCalls:
-      m_Calls: []
+  spawner: {fileID: 0}

@@ -23,6 +23,7 @@ public class Powerups : MonoBehaviour
     public bool isInvincible;
     private Multiplayer _multiplayerComponent;
     float PowerupTimer = 10.0f;
+    private PlayerController _playerController;
     
 
    
@@ -32,8 +33,9 @@ public class Powerups : MonoBehaviour
     void Start()
     {
        _multiplayerComponent = FindObjectOfType<Multiplayer>();
-       _multiplayerComponent.RegisterRemoteProcedure("PowerupEaten", TimerProcedureFunction);
+       _multiplayerComponent.RegisterRemoteProcedure("Invincibility", TimerProcedureFunction);
         isInvincible = false;
+        _playerController = GetComponent<PlayerController>();
         
         
         
@@ -67,24 +69,7 @@ public class Powerups : MonoBehaviour
             ResetTimer();
         }
     }
-
-  //public override void AssembleData(Writer writer, byte LOD = 100)
-  //{
-//
-//
-  //    //writer.Write((_transform.localPosition));
-  //    //throw new System.NotImplementedException();
-//
-  //}
-//
-  //public override void DisassembleData(Reader reader, byte LOD = 100)
-  //{
-//
-  //    //_transform.localPosition = reader.ReadVector2();
-  //    //throw new System.NotImplementedException();
-  //}
-
-
+    
 
   private void ResetTimer()
   {
@@ -96,11 +81,6 @@ public class Powerups : MonoBehaviour
         Debug.Log("Timer started");
         PowerupTimer = 10.0f;
         isInvincible = true;
-        //if (PowerupTimer <= 0)
-        //{
-        //    ResetTimer();
-        //    Debug.Log("timer has been reset " + PowerupTimer);
-        //}
     }
 
     private void TimerProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
@@ -114,12 +94,9 @@ public class Powerups : MonoBehaviour
         if (other.gameObject.CompareTag("Powerup"))
         {
             isInvincible = true;
-            Debug.Log("Collision happened");
-            _multiplayerComponent.InvokeRemoteProcedure("PowerupEaten", UserId.All);
+            _multiplayerComponent.InvokeRemoteProcedure("Invincibility", UserId.All);
             other.transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
             Debug.Log(other.gameObject.transform.position);
-            //StartTimer();
-            //Destroy(other.gameObject);
         }
     }
 }

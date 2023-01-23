@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -2664625032328732975}
   - component: {fileID: 1287758617857316005}
   - component: {fileID: 8576241498990404829}
-  - component: {fileID: -1591571863091017096}
+  - component: {fileID: -7920897822811779297}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -236,7 +236,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-1591571863091017096
+--- !u!114 &-7920897822811779297
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,7 +245,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2169122544570248502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffd474d4fc46eed4b987237168b62e44, type: 3}
+  m_Script: {fileID: 11500000, guid: c2c69bea63d7e234cb5b5228a72f5951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
+  isFaster: 0
+  isRotatingFaster: 0
+  isBigger: 0
+  PowerupRef: {fileID: 7934891420956055995, guid: fa09ff10226d5644a85aa302ce38cd9b, type: 3}

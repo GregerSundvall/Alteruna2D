@@ -2,6 +2,7 @@
 using Alteruna;
 using Unity.Mathematics;
 using UnityEngine;
+using Avatar = Alteruna.Avatar;
 using Random = UnityEngine.Random;
 
 public class Fewd : Synchronizable 
@@ -11,6 +12,8 @@ public class Fewd : Synchronizable
     {
         transform.Translate(0, 1.0f * Time.deltaTime, 0, Space.Self);
         Wrap();
+        
+        SyncUpdate();
     }
 
     private void Wrap()
@@ -42,7 +45,7 @@ public class Fewd : Synchronizable
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<Avatar>().IsMe)
         {
             ResetPosition();
         }

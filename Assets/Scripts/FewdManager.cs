@@ -28,12 +28,6 @@ public class FewdManager : MonoBehaviour
         }
     }
 
-
-    // public void Register(Fewd fewdInstance)
-    // {
-    //     listOfFewd.Add(fewdInstance);
-    // }
-    
     public void PublishAllPositions()
     {
         for (int i = 0; i < listOfFewd.Count; i++)

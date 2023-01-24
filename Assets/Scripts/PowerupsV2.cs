@@ -8,18 +8,14 @@ public class PowerupsV2 : MonoBehaviour
     public bool isInvincible;
     public bool isFaster;
     public bool isRotatingFaster;
-    //public bool isBigger;
     private int _randomNumber;
     float _invincibilityTimer = 10.0f;
     float _speedupTimer = 10.0f;
     float _increaseRotationSpeedTimer = 10.0f;
-    //private float _increaseSizeTimer = 10.0f;
     private SpriteRenderer _renderer;
     private Multiplayer _multiplayerComponent;
     private PlayerController _playerController;
-    //[SerializeField] private GameObject PowerupRef;
-    //private SpriteRenderer _colorchange;
-
+   
 
     private void Awake()
     {
@@ -39,23 +35,6 @@ public class PowerupsV2 : MonoBehaviour
         isInvincible = false;
         isFaster = false;
         isRotatingFaster = false;
-        //_colorchange = PowerupRef.GetComponent<SpriteRenderer>();
-        
-        
-        
-
-       //switch (_RandomNumber)
-       //{
-       //    case 0:
-       //        _colorchange.color = Color.red;
-       //        break;
-       //    case 1:
-       //        _colorchange.color = Color.yellow;
-       //        break;
-       //    case 2:
-       //        _colorchange.color = Color.magenta;
-       //        break;
-       //}
     }
 
    
@@ -140,21 +119,18 @@ public class PowerupsV2 : MonoBehaviour
             if (_randomNumber == 0)
             {
                 isInvincible = true;
-                //_colorchange.color = Color.red;
                 _multiplayerComponent.InvokeRemoteProcedure("Invincibility", UserId.All);
             }
 
             if (_randomNumber == 1)
             {
                 isFaster = true;
-                //_colorchange.color = Color.yellow;
                 _multiplayerComponent.InvokeRemoteProcedure("Speedup", UserId.All);
             }
 
             if (_randomNumber == 2)
             {
                 isRotatingFaster = true;
-                //_colorchange.color = Color.magenta;
                 _multiplayerComponent.InvokeRemoteProcedure("IncreasedRotation", UserId.All);
                 Debug.Log(_playerController.RotationSpeed);
             }

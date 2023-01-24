@@ -1,4 +1,3 @@
-
 using Alteruna;
 using Unity.Mathematics;
 using UnityEngine;

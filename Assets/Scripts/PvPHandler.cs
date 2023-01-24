@@ -1,4 +1,3 @@
-using System;
 using Alteruna;
 using Alteruna.Trinity;
 using UnityEngine;

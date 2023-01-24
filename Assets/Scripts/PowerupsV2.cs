@@ -25,7 +25,7 @@ public class PowerupsV2 : MonoBehaviour
     {
         //Sets the random seed for the powerup and picks a random number to spawn different powerup on startup.
         Random.InitState((int)System.DateTime.Now.Ticks);
-        _randomNumber = Random.Range(0, 2);
+        _randomNumber = Random.Range(0, 3);
     }
 
     // Start is called before the first frame update
@@ -194,7 +194,7 @@ public class PowerupsV2 : MonoBehaviour
                 Debug.Log(_playerController.RotationSpeed);
             }
             Random.InitState(System.DateTime.Now.Minute);
-            //Picks a new random number and position and a new random seed for the next powerup to spawn.
+            _randomNumber = Random.Range(0, 3);
             if (gameObject.GetComponent<PlayerController>().Avatar.IsMe)
             {
                 other.gameObject.GetComponent<PowerUpObject>().NewPosition();

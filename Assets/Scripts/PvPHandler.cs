@@ -28,11 +28,13 @@ public class PvPHandler : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Avatar>() != null)
         {
-            var PWRef = other.gameObject.GetComponent<Powerups>();
+            var PWRef = other.gameObject.GetComponent<PowerupsV2>();
             if (PWRef != null)
             {
+                Debug.Log("Valid player target");
                 if (!PWRef.isInvincible)
                 {
+                    Debug.Log("No longer invincible");
                     PlayerController otherPlayerController = other.gameObject.GetComponent<PlayerController>();
 
                     if (otherPlayerController.Size < _playerController.Size)
@@ -54,7 +56,9 @@ public class PvPHandler : MonoBehaviour
     private void KillProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
     {
         Debug.Log("KILL PROCEDURE RUN");
+        Debug.Log(gameObject.name);
         transform.position = Vector3.zero; // placeholder position
+        _playerController = GetComponent<PlayerController>();
         _playerController.Size = 1f;
         _playerController.sizeWasUpdated = true;
         //

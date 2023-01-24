@@ -1,21 +1,11 @@
 
-using System;
 using Alteruna;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Fewd : MonoBehaviour 
+public class Fewd : Synchronizable 
 {
-    public FewdManager fewdManager;
-    // private FewdData fewdData;
-    public int index;
-
-    
-    void Start()
-    {
-        transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
-    }
 
     void Update()
     {
@@ -31,12 +21,23 @@ public class Fewd : MonoBehaviour
         if (transform.position.y < 50) { transform.position += Vector3.up * 100; } 
     }
     
-    void ResetPosition()
+    public void ResetPosition()
     {
         transform.position = new Vector3(Random.Range(50, 150), Random.Range(50, 150), 0);
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
-        
-        fewdManager.PublishChangedPosition(index);
+        Commit();
+    }
+
+    public override void AssembleData(Writer writer, byte LOD = 100)
+    {
+        writer.Write(transform.position);
+        writer.Write(transform.rotation.eulerAngles.z);
+    }
+
+    public override void DisassembleData(Reader reader, byte LOD = 100)
+    {
+        transform.position = reader.ReadVector3();
+        transform.rotation = Quaternion.Euler(0, 0, reader.ReadFloat());
     }
 
     private void OnCollisionEnter(Collision collision)

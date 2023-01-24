@@ -1,52 +1,39 @@
+using System;
 using System.Collections.Generic;
 using Alteruna;
 using UnityEngine;
 
-public class FewdManager : MonoBehaviour 
+public class FewdManager : MonoBehaviour
 {
-    [SerializeField] private Spawner spawner;
-    private Multiplayer alterunaMP;
-    private bool iAmPlayerZero = false;
-    private List<GameObject> spawnedFewd;
+    public List<Fewd> listOfFewd;
 
-    void Start()
+    private void Start()
     {
-    }
-    
-    public void Register(GameObject go)
-    {
-        spawnedFewd.Add(go);
-    }
-    
-    public void Init()
-    {
-        alterunaMP = FindObjectOfType<Multiplayer>();
-        if (alterunaMP.Me == alterunaMP.GetUser(0))
+        var array = FindObjectsOfType<Fewd>();
+        foreach (var obj in array)
         {
-            iAmPlayerZero = true;
+            listOfFewd.Add(obj);
         }
-        
-        if (iAmPlayerZero)
+    }
+    
+    public void OnJoinRoom()
+    {
+        var alteruna = FindObjectOfType<Multiplayer>();
+        if (alteruna.Me == alteruna.GetUser(0))
         {
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < listOfFewd.Count; i++)
             {
-                spawnedFewd.Add(spawner.Spawn(0));
+                listOfFewd[i].ResetPosition();
             }
         }
     }
-    
-    public void SyncPositions()
+
+    public void PublishAllPositions()
     {
-        foreach (var spawnedObject in spawnedFewd)
+        for (int i = 0; i < listOfFewd.Count; i++)
         {
-            var fewd = spawnedObject.GetComponent<Fewd>();
-            fewd.SyncPosition();
+            listOfFewd[i].Commit();
         }
     }
-    
 
-    void Update()
-    {
-        
-    }
 }

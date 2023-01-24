@@ -7,10 +7,8 @@ using Alteruna;
 /// 
 public class ExampleSynchronizable : Synchronizable
 {
-    
     // Data to be synchronized with other players in our playroom.
     public float SynchronizedFloat = 3.0f;
-    
 
     // Used to store the previous version of our data so that we know when it has changed.
     private float _oldSynchronizedFloat;

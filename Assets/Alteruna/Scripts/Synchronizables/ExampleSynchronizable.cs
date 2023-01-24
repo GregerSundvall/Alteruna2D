@@ -42,6 +42,6 @@ public class ExampleSynchronizable : Synchronizable
         }
 
         // Update the Synchronizable
-        base.SyncUpdate();
+        SyncUpdate();
     }
 }

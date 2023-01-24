@@ -30,10 +30,4 @@ public class PowerupManager : MonoBehaviour
         Run();
         RandomizePosition();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

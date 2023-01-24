@@ -73,10 +73,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        //if (Avatar.IsMe) This might be the reason we are desyncing in size
+        if (Avatar.IsMe)
         {
             if (col.gameObject.CompareTag("Fewd"))
-            {
+            {   
                 sizeWasUpdated = true;
                 Size += 0.01f;
             }

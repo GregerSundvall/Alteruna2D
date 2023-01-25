@@ -1,4 +1,6 @@
+using System.Security.Cryptography.X509Certificates;
 using Alteruna;
+using Alteruna.Trinity;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -13,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Camera _camera;
     private RigidbodySynchronizable rigidbodySync;
     public bool sizeWasUpdated;
+    private Multiplayer _multiplayer;
+    private ProcedureParameters _parameters = new ProcedureParameters(); // dumb
     
 
     void Start()
@@ -22,18 +26,22 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
         rigidbodySync = GetComponent<RigidbodySynchronizable>();
         FindObjectOfType<Score>().AddPlayer(transform);
+        _multiplayer = FindObjectOfType<Multiplayer>();
+        _multiplayer.RegisterRemoteProcedure("PlayerSizeIncrease", OnSizeIncreaseFunction);
+        _multiplayer.RegisterRemoteProcedure("PlayerSizeReset", OnSizeResetFunction);
+        _multiplayer.RegisterRemoteProcedure("PlayerSizeJump", OnSizeJumpFunction);
     }
 
     void Update()
     {
         // Only let input affect the avatar if it belongs to me
+        if (sizeWasUpdated) // remnant
+        {
+            transform.localScale = new Vector3(Size, Size, 1);
+            sizeWasUpdated = false;
+        }
         if (Avatar.IsMe)
         {
-            if (sizeWasUpdated)
-            {
-                transform.localScale = new Vector3(Size, Size, 1);
-                sizeWasUpdated = false;
-            }
             // Set the avatar representing me to be green
             _renderer.color = Color.green;
 
@@ -67,9 +75,56 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y > 150) { transform.position += Vector3.down * 100; }
         if (transform.position.y < 50) { transform.position += Vector3.up * 100; }
     }
-    
-    
 
+    private void OnSizeIncreaseFunction(ushort User, ProcedureParameters parameters, uint callId,
+        ITransportStreamReader processor)
+    {
+        if (!Avatar.IsMe)
+        {
+            sizeWasUpdated = true;
+            Size += 0.01f;
+        }
+    }
+
+    public void EatOther()
+    {
+        if (Avatar.IsMe)
+        {
+            Size += 0.6f;
+            sizeWasUpdated = true;
+            _multiplayer.InvokeRemoteProcedure("PlayerSizeJump", UserId.All);
+        }
+    }
+
+    private void OnSizeJumpFunction(ushort User, ProcedureParameters parameters, uint callId,
+        ITransportStreamReader processor)
+    {
+        if (!Avatar.IsMe)
+        {
+            Size += 0.6f;
+            sizeWasUpdated = true;
+        }
+    }
+
+    public void ResetSize()
+    {
+        if (Avatar.IsMe)
+        {
+            Size = 1;
+            sizeWasUpdated = true;
+            _multiplayer.InvokeRemoteProcedure("PlayerSizeReset", UserId.All);
+        }
+    }
+    private void OnSizeResetFunction(ushort User, ProcedureParameters parameters, uint callId,
+        ITransportStreamReader processor)
+    {
+        if (!Avatar.IsMe)
+        {
+            Size = 1;
+            sizeWasUpdated = true;
+        }
+    }
+    
     private void OnCollisionEnter(Collision col)
     {
         if (Avatar.IsMe)
@@ -77,9 +132,9 @@ public class PlayerController : MonoBehaviour
             if (col.gameObject.CompareTag("Fewd"))
             {   
                 sizeWasUpdated = true;
-                Size += 0.01f;
+                float i = (Size += 0.01f);
+               _multiplayer.InvokeRemoteProcedure("PlayerSizeIncrease", UserId.All);
             }
         }
     }
-    
 }

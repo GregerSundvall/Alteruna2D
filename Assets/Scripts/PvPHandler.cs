@@ -9,6 +9,8 @@ public class PvPHandler : MonoBehaviour
     private User _serverPlayer;
     private PlayerController _playerController;
     private Multiplayer _multiplayerComponent;
+    private ProcedureParameters _Parame = new ProcedureParameters(); // wtf
+    private string idToSend;
     //[SerializeField] private GameObject PowerupRef;
     
     void Start()
@@ -20,7 +22,7 @@ public class PvPHandler : MonoBehaviour
         
         if (_serverPlayer == _multiplayerComponent.Me)
         {}
-        _multiplayerComponent.RegisterRemoteProcedure("KillPlayer", KillProcedureFunction);
+        //_multiplayerComponent.RegisterRemoteProcedure("KillPlayer", KillProcedureFunction);
     }
     
     private void OnCollisionEnter(Collision other)
@@ -40,27 +42,45 @@ public class PvPHandler : MonoBehaviour
                     {
                         Debug.Log("I'm bigger than you");
                         Debug.Log(GetComponent<UniqueID>().UIDString);
-                        other.gameObject.GetComponent<PvPHandler>().Kill();
+                        _playerController.EatOther();
+                        //idToSend = other.gameObject.GetComponent<UniqueID>().UIDString;
+                        //Debug.Log(idToSend);
+                        //_Parame.Set("id", idToSend.ToString());
+                        //_multiplayerComponent.InvokeRemoteProcedure("KillPlayer", UserId.All, _Parame);
+                    }
+                    else
+                    {
+                        _playerController.ResetSize();
                     }
                 }
             }
         }
     }
 
-    private void Kill()
-    {
-        _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", UserId.All);
-    }
+   /* private void Kill(GameObject to)
+    { 
+        idToSend = to.GetComponent<UniqueID>().UIDString;
+        Debug.Log(idToSend);
+        _Parame.Set("id", idToSend.ToString());
+        _multiplayerComponent.InvokeRemoteProcedure("KillPlayer", UserId.All, _Parame);
+    }*/
     
-    private void KillProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
+    /*private void KillProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
     {
+        string UIDString;
+        UIDString = parameters.Get("id", "");
         Debug.Log("KILL PROCEDURE RUN");
-        Debug.Log(gameObject.name);
-        transform.position = Vector3.zero; // placeholder position
-        _playerController = GetComponent<PlayerController>();
-        _playerController.Size = 1f;
-        _playerController.sizeWasUpdated = true;
-        //
+        Debug.Log(gameObject.name); 
+        // placeholder position
+       // _playerController = GetComponent<PlayerController>();
+       if (gameObject.GetComponent<UniqueID>().UIDString == UIDString)
+       {
+           transform.position = Vector3.zero;
+           //_playerController.Size = 1f;
+           _playerController.Size = 1f;
+           _playerController.sizeWasUpdated = true;
+       }
+       //
         // foreach (GameObject gObject in SceneManager.GetActiveScene().GetRootGameObjects()) // there must be a better way
         // {
         //     if (gameObject.GetComponent<UniqueID>().UIDString == otherGuid)
@@ -72,5 +92,5 @@ public class PvPHandler : MonoBehaviour
         //        otherPlayerController.sizeWasUpdated = true;
         //     }
         // }
-    }
+    }*/
 }

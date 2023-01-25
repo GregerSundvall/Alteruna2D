@@ -1,6 +1,4 @@
 using UnityEngine;
-using Alteruna.Trinity;
-using Alteruna;
 using Random = UnityEngine.Random;
 
 public class PowerupsV2 : MonoBehaviour

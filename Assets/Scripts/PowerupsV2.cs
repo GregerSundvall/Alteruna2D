@@ -1,4 +1,5 @@
 using UnityEngine;
+using Alteruna.Trinity;
 using Alteruna;
 using Random = UnityEngine.Random;
 
@@ -59,7 +60,7 @@ public class PowerupsV2 : MonoBehaviour
         if (_speedupTimer <= 0)
         {
             isFaster = false;
-            _playerController.Speed /= 2;
+            _playerController.speed /= 2;
             _speedupTimer = 10.0f;
         }
         
@@ -67,7 +68,7 @@ public class PowerupsV2 : MonoBehaviour
         {
             isRotatingFaster = false;
             
-            _playerController.RotationSpeed /= 2;
+            _playerController.rotationSpeed /= 2;
             _increaseRotationSpeedTimer = 10.0f;
         }
     }
@@ -82,14 +83,14 @@ public class PowerupsV2 : MonoBehaviour
     {
         _speedupTimer = 10.0f;
         isFaster = true;
-        _playerController.Speed *=2;
+        _playerController.speed *=2;
     }
 
     private void StartIncreaseRotationSpeedTimer()
     {
         _increaseRotationSpeedTimer = 10.0f;
         isRotatingFaster = true;
-        _playerController.RotationSpeed *= 2;
+        _playerController.rotationSpeed *= 2;
     }
 
 
@@ -115,7 +116,7 @@ public class PowerupsV2 : MonoBehaviour
             }
             Random.InitState(System.DateTime.Now.Minute);
             _randomNumber = Random.Range(0, 3);
-            if (gameObject.GetComponent<PlayerController>().Avatar.IsMe)
+            if (gameObject.GetComponent<PlayerController>().avatar.IsMe)
             {
                 other.gameObject.GetComponent<PowerUpObject>().NewPosition();
             }

@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using Alteruna;
 using Alteruna.Trinity;
 using Unity.Mathematics;
@@ -16,8 +15,7 @@ public class PlayerController : MonoBehaviour
     private RigidbodySynchronizable rigidbodySync;
     public bool sizeWasUpdated;
     private Multiplayer _multiplayer;
-    private ProcedureParameters _parameters = new ProcedureParameters(); // dumb
-    
+
 
     void Start()
     {
@@ -59,9 +57,6 @@ public class PlayerController : MonoBehaviour
             var translation = new Vector3(newX, newY, 0);
             
             rigidbodySync.position += translation;
-            // rigidbodySync.MovePosition(translation);
-            // rigidbodySync.MovePosition(rigidbodySync.position + translation);
-            
             _camera.transform.position = new Vector3(rigidbodySync.position.x, rigidbodySync.position.y, -20 * Size);
             
             Wrap();

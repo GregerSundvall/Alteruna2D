@@ -33,7 +33,7 @@ public class PvPHandler : MonoBehaviour
                     Debug.Log("No longer invincible");
                     PlayerController otherPlayerController = other.gameObject.GetComponent<PlayerController>();
 
-                    if (otherPlayerController.Size < _playerController.Size)
+                    if (otherPlayerController.size < _playerController.size)
                     {
                         Debug.Log("I'm bigger than you");
                         Debug.Log(GetComponent<UniqueID>().UIDString);

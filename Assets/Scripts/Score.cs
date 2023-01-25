@@ -23,7 +23,8 @@ public class Score : MonoBehaviour
         scoreText.text = "";
         for (int i = 0; i < players.Count; i++)
         {
-            scoreText.text += names[i] + ": " + players[i].localScale.x.ToString("F2") + "\n"; // this is only local
+            int score = players[i].GetComponent<PlayerController>().score * 100;
+            scoreText.text += names[i] + ": " + score + "\n"; // this is only local
         }
 
     }

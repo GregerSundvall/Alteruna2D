@@ -6,14 +6,14 @@ using Random = UnityEngine.Random;
 public class PowerupsV2 : MonoBehaviour
 {
     public bool isInvincible;
-    public bool isFaster;
-    public bool isRotatingFaster;
+    private bool _isFaster;
+    private bool _isRotatingFaster;
     private int _randomNumber;
-    float _invincibilityTimer = 10.0f;
-    float _speedupTimer = 10.0f;
-    float _increaseRotationSpeedTimer = 10.0f;
-    private SpriteRenderer _renderer;
-    private PlayerController _playerController;
+    private float _invincibilityTimer = 10.0f;
+    private float _speedupTimer = 10.0f;
+    private float _increaseRotationSpeedTimer = 10.0f;
+    [SerializeField]private PlayerController _playerController;
+    
    
 
     private void Awake()
@@ -26,10 +26,9 @@ public class PowerupsV2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _playerController = GetComponent<PlayerController>();
-       isInvincible = false;
-        isFaster = false;
-        isRotatingFaster = false;
+        isInvincible = false;
+        _isFaster = false;
+        _isRotatingFaster = false;
     }
 
    
@@ -41,12 +40,12 @@ public class PowerupsV2 : MonoBehaviour
             _invincibilityTimer -= Time.deltaTime;
         }
         
-        if (isFaster)
+        if (_isFaster)
         {
             _speedupTimer -= Time.deltaTime;
         }
         
-        if (isRotatingFaster)
+        if (_isRotatingFaster)
         {
             _increaseRotationSpeedTimer -= Time.deltaTime;
         }
@@ -59,14 +58,14 @@ public class PowerupsV2 : MonoBehaviour
 
         if (_speedupTimer <= 0)
         {
-            isFaster = false;
+            _isFaster = false;
             _playerController.speed /= 2;
             _speedupTimer = 10.0f;
         }
         
         if (_increaseRotationSpeedTimer <= 0)
         {
-            isRotatingFaster = false;
+            _isRotatingFaster = false;
             
             _playerController.rotationSpeed /= 2;
             _increaseRotationSpeedTimer = 10.0f;
@@ -82,14 +81,14 @@ public class PowerupsV2 : MonoBehaviour
     private void StartSpeedupTimer()
     {
         _speedupTimer = 10.0f;
-        isFaster = true;
+        _isFaster = true;
         _playerController.speed *=2;
     }
 
     private void StartIncreaseRotationSpeedTimer()
     {
         _increaseRotationSpeedTimer = 10.0f;
-        isRotatingFaster = true;
+        _isRotatingFaster = true;
         _playerController.rotationSpeed *= 2;
     }
 
@@ -101,22 +100,23 @@ public class PowerupsV2 : MonoBehaviour
             if (_randomNumber == 0)
             {
                 isInvincible = true;
+                StartInvincibilityTimer();
             }
 
             if (_randomNumber == 1)
             {
-                isFaster = true;
+                _isFaster = true;
                 StartSpeedupTimer();
             }
 
             if (_randomNumber == 2)
             {
-                isRotatingFaster = true;
+                _isRotatingFaster = true;
                 StartIncreaseRotationSpeedTimer();
             }
             Random.InitState(System.DateTime.Now.Minute);
             _randomNumber = Random.Range(0, 3);
-            if (gameObject.GetComponent<PlayerController>().avatar.IsMe)
+            if (_playerController.avatar.IsMe)
             {
                 other.gameObject.GetComponent<PowerUpObject>().NewPosition();
             }

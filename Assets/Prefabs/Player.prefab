@@ -253,8 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  isFaster: 0
-  isRotatingFaster: 0
+  _playerController: {fileID: 2169122544570248503}
 --- !u!82 &-4455397961324742461
 AudioSource:
   m_ObjectHideFlags: 0
@@ -363,3 +362,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5bf0e70872b2a43a128142e04d8257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSource: {fileID: -4455397961324742461}

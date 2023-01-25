@@ -2,14 +2,7 @@ using UnityEngine;
 
 public class PowerupAudio : MonoBehaviour
 {
-    private AudioSource _audioSource;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
-
+    [SerializeField]private AudioSource _audioSource;
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))

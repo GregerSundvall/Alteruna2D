@@ -57,15 +57,14 @@ public class PowerupsV2 : MonoBehaviour
         if (_speedupTimer <= 0)
         {
             _isFaster = false;
-            _playerController.speed /= 2;
+            _playerController.speed *= 0.5f;
             _speedupTimer = 10.0f;
         }
         
         if (_increaseRotationSpeedTimer <= 0)
         {
             _isRotatingFaster = false;
-            
-            _playerController.rotationSpeed /= 2;
+            _playerController.rotationSpeed *= 0.5f;
             _increaseRotationSpeedTimer = 10.0f;
         }
     }

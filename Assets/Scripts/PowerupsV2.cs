@@ -1,6 +1,5 @@
 using UnityEngine;
 using Alteruna;
-using Alteruna.Trinity;
 using Random = UnityEngine.Random;
 
 public class PowerupsV2 : MonoBehaviour
@@ -13,7 +12,6 @@ public class PowerupsV2 : MonoBehaviour
     float _speedupTimer = 10.0f;
     float _increaseRotationSpeedTimer = 10.0f;
     private SpriteRenderer _renderer;
-    private Multiplayer _multiplayerComponent;
     private PlayerController _playerController;
    
 
@@ -27,12 +25,8 @@ public class PowerupsV2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       _multiplayerComponent = FindObjectOfType<Multiplayer>();
-       _playerController = GetComponent<PlayerController>();
-       _multiplayerComponent.RegisterRemoteProcedure("Invincibility", InvincibilityTimerProcedureFunction);
-       _multiplayerComponent.RegisterRemoteProcedure("Speedup", SpeedupTimerProcedureFunction);
-       _multiplayerComponent.RegisterRemoteProcedure("IncreasedRotation", RotationSpeedupTimerProcedureFunction);
-        isInvincible = false;
+        _playerController = GetComponent<PlayerController>();
+       isInvincible = false;
         isFaster = false;
         isRotatingFaster = false;
     }
@@ -65,15 +59,16 @@ public class PowerupsV2 : MonoBehaviour
         if (_speedupTimer <= 0)
         {
             isFaster = false;
-            _playerController.Speed = 10;
+            _playerController.Speed /= 2;
             _speedupTimer = 10.0f;
         }
         
         if (_increaseRotationSpeedTimer <= 0)
         {
             isRotatingFaster = false;
-            _playerController.RotationSpeed = 10;
-            _invincibilityTimer = 10.0f;
+            
+            _playerController.RotationSpeed /= 2;
+            _increaseRotationSpeedTimer = 10.0f;
         }
     }
     
@@ -87,30 +82,16 @@ public class PowerupsV2 : MonoBehaviour
     {
         _speedupTimer = 10.0f;
         isFaster = true;
-        _playerController.Speed = 100;
+        _playerController.Speed *=2;
     }
 
     private void StartIncreaseRotationSpeedTimer()
     {
         _increaseRotationSpeedTimer = 10.0f;
         isRotatingFaster = true;
-        _playerController.RotationSpeed = 100;
+        _playerController.RotationSpeed *= 2;
     }
 
-    private void InvincibilityTimerProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
-    {
-        StartInvincibilityTimer();
-    }
-    
-    private void SpeedupTimerProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
-    {
-        StartSpeedupTimer();
-    }
-    
-    private void RotationSpeedupTimerProcedureFunction(ushort userToKill, ProcedureParameters parameters, uint callId, ITransportStreamReader processor)
-    {
-        StartIncreaseRotationSpeedTimer();
-    }
 
     private void OnCollisionEnter(Collision other)
     {
@@ -119,20 +100,18 @@ public class PowerupsV2 : MonoBehaviour
             if (_randomNumber == 0)
             {
                 isInvincible = true;
-                _multiplayerComponent.InvokeRemoteProcedure("Invincibility", UserId.All);
             }
 
             if (_randomNumber == 1)
             {
                 isFaster = true;
-                _multiplayerComponent.InvokeRemoteProcedure("Speedup", UserId.All);
+                StartSpeedupTimer();
             }
 
             if (_randomNumber == 2)
             {
                 isRotatingFaster = true;
-                _multiplayerComponent.InvokeRemoteProcedure("IncreasedRotation", UserId.All);
-                Debug.Log(_playerController.RotationSpeed);
+                StartIncreaseRotationSpeedTimer();
             }
             Random.InitState(System.DateTime.Now.Minute);
             _randomNumber = Random.Range(0, 3);
